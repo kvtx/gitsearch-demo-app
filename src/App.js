@@ -1,23 +1,16 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Query from './services/query';
 
 function App() {
+  let q = new Query();
+  q.makeQuery('search');
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Made CAll
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
     </div>
   );
