@@ -14,7 +14,9 @@ class RepoList extends React.Component{
         super(props);
         this.state = {
             sortBy: 'score',
-            repos:this.props.repos
+            repos:this.props.repos,
+            filteredRepos:this.props.repos,
+            search:'',
         }
     }
     componentDidMount(){
@@ -32,8 +34,25 @@ class RepoList extends React.Component{
             })
         }
     }
-    filterRepos = () => {
-
+    setFilter = (search) => {
+        this.setState({search});
+        this.filterRepos(search);
+    }
+    filterRepos = (search) => {
+        let repos = this.state.repos;     
+        search = search.toLowerCase();   
+        if(search.length > 0){
+            this.setState({
+                filteredRepos:repos.filter((repo) => {
+                    return repo.name.toLowerCase().indexOf(search) >= 0;
+                })
+            })
+        }else{
+            this.setState({
+                filteredRepos:repos
+            })
+        }
+        this.sortRepos();
     }
     renderRepoSearch = () => {
         //build bar to take input to query api to get repos by query from github
@@ -46,8 +65,8 @@ class RepoList extends React.Component{
                 className='search-repos-input'
                 placeholder="Search Repositories"
                 inputProps={{ 'aria-label': 'Search Repositories' }}
-                onKeyDown = {(e) => {
-                    this.setState({search:e.target.value})
+                onChange= {(e) => {
+                    this.setFilter(e.target.value);
                 }}
                 />
                 <Divider className='divider' />
@@ -55,7 +74,7 @@ class RepoList extends React.Component{
         )
     }
     render(){
-        let repos = this.state.repos;
+        let repos = this.state.filteredRepos;
         let sortBy = this.state.sortBy;
         return(
             <Paper className='repo-list-container'>

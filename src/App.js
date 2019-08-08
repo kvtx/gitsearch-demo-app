@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
 import MenuIcon from '@material-ui/icons/Menu';
+import Typography from '@material-ui/core/Typography';
 import YoutubeSearch from '@material-ui/icons/YoutubeSearchedFor';
 class App extends React.Component{
   //
@@ -60,12 +61,14 @@ class App extends React.Component{
     let message = (this.state.hasRetrieved ? "No repos were found matching this query" : null);
     return (
       <div className="App">
-        <div className='get-repos-container'>
+        <div className='get-repos-container app-header'>
           <this.renderQueryBar/>
         </div>
         {hasRepos === true ?
-
-          <RepoList lastQuery={this.state.lastQuery} repos={this.state.repos}/>
+          <div className='app-body'>
+            <Paper className='results'><Typography>Showing results for: {this.state.lastQuery} </Typography></Paper>
+            <RepoList lastQuery={this.state.lastQuery} repos={this.state.repos}/>
+          </div>
           :
           message
         }
