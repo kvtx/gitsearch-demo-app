@@ -2,14 +2,23 @@ import React from 'react';
 import RepoItem from './repo-item';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-
+import Paper from '@material-ui/core/Paper';
+import IconButton from '@material-ui/core/IconButton';
+import InputBase from '@material-ui/core/InputBase';
+import Divider from '@material-ui/core/Divider';
+import MenuIcon from '@material-ui/icons/Menu';
+import SearchIcon from '@material-ui/icons/Search';
+import SwapVert from '@material-ui/icons/SwapVert';
 class RepoList extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            sortBy: false,
+            sortBy: 'score',
             repos:this.props.repos
         }
+    }
+    componentDidMount(){
+        this.sortRepos();
     }
     setSort = (sortBy) => {
         this.setState({sortBy});
@@ -19,31 +28,59 @@ class RepoList extends React.Component{
         let repos = this.props.repos;
         if(sortBy !== false){
             this.setState({
-                repos:repos.sort((a,b) => a[sortBy] - b[sortBy])
+                repos:repos.sort((a,b) => b[sortBy] -a[sortBy] )
             })
         }
-    }  
+    }
+    filterRepos = () => {
+
+    }
+    renderRepoSearch = () => {
+        //build bar to take input to query api to get repos by query from github
+        return (
+            <span className='search-repos-input-container'>
+                <IconButton onClick={() => this.getRepos()} className='query-button' aria-label="search">
+                    <SearchIcon />
+                </IconButton>
+                <InputBase
+                className='search-repos-input'
+                placeholder="Search Repositories"
+                inputProps={{ 'aria-label': 'Search Repositories' }}
+                onKeyDown = {(e) => {
+                    this.setState({search:e.target.value})
+                }}
+                />
+                <Divider className='divider' />
+            </span>
+        )
+    }
     render(){
         let repos = this.state.repos;
         let sortBy = this.state.sortBy;
         return(
-            <div className='repo-list-container'>
-                <Select
-                    value={sortBy}
-                    onChange={(value) => this.props.setSort(value)}
-                    >
-                    <MenuItem value='Relevance'>Relevance</MenuItem>
-                    <MenuItem value='Stars'>Stars</MenuItem>
-                </Select>
-                <ul className='repo-list'>
+            <Paper className='repo-list-container'>
+                <div className='repo-list-header'>
+                    <this.renderRepoSearch/>
+                    <span className='sort-container'>
+                        <SwapVert className='sort-icon'/>
+                        <Select
+                            value={sortBy}
+                            onChange={(e) => this.setSort(e.target.value)}
+                            >
+                            <MenuItem value='score'>Relevance</MenuItem>
+                            <MenuItem value='stargazers_count'>Stars</MenuItem>
+                        </Select>
+                    </span>
+                </div>
+                
+                <div className='repo-list'>
                     {repos.map((repo) => {
                         return(
                             <RepoItem item={repo}/>
                         )
                     })}
-
-                </ul>
-            </div>
+                </div>
+            </Paper>
         )
     }
 }
