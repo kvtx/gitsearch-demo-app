@@ -1,4 +1,4 @@
-class Query {
+class Query  {
     constructor(){
         this.useStaging = true;
         this.localTestApiURL = "http://localhost:8080";
@@ -10,26 +10,24 @@ class Query {
     prepDataForAPI(data){
         return JSON.stringify({data});
     }
-    makeQuery(data){
+    async makeQuery(query){
         let url = `${this.getApiUrl()}/gitsearch/find`;
-        fetch(url, {
+        return fetch(url, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             headers: {
                 'Content-Type': 'application/json',
                 //'Content-Type': 'application/x-www-form-urlencoded',
             },
-            body:this.prepDataForAPI(data), // body data type must match "Content-Type" header
+            body:this.prepDataForAPI(query), // body data type must match "Content-Type" header
         })
         .then(res => res.json())
         .then(response => {
-            if('data' in response){
-                this.handleResData(response.data);
+            console.log(response);
+            if('data' in response && 'items' in response.data){
+                return response.data.items;
             }
         })
         .catch(error => console.error('Error:', error));
-    }
-    handleResData(response){
-        console.log(response);
     }
 }
 
