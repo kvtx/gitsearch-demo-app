@@ -1,0 +1,85 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body, #root, .App{
+  position:relative;
+  display:block;
+  width:100%;
+  height:100%;
+  background: whitesmoke;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+.repo-list-container{
+  width:95%;
+  margin:20px auto ;
+  padding:15px;
+  position:relative;
+  .repo-list-header{
+    text-align: left;
+    padding-left:10px;
+    .sort-container{
+      position:absolute;
+      right:25px;
+      top:15px;
+    }
+  }
+  .repo-list{
+    .repo-item{
+      padding: 8px;
+      text-align: left;
+      .repo-header{
+        padding: 10px;
+        .repo-rating{
+          float:right;
+          text-align:left;
+          width: 80px;
+          svg{
+            top:5px;
+            position:relative;
+          }
+        }
+      }
+      .repo-title{
+        a{
+          text-decoration: none;
+          font-weight: bold;
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}
+
+
+.get-repos-input-container {
+  padding: '2px 4px';
+  display: 'flex';
+  text-align: 'center';
+  border-radius:0px;
+  width: 100%;
+  input{
+    margin-left: 8;
+    flex: 1;
+  }
+  .query-button {
+    padding: 10;
+  }
+  .divider{
+    width: 1;
+    height: 28;
+    margin: 4;
+  }
+}
+
+
+
+
