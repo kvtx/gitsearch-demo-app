@@ -1,7 +1,7 @@
 //handle querying API to get repos from github based on query
 class Query  {
     constructor(){
-        this.useStaging = true;
+        this.useStaging = false;
         this.localTestApiURL = "http://localhost:8080";
         this.apiURL = "http://gitsearch-demo-api.kvtx.io";
     }
