@@ -43,7 +43,7 @@ code {
       padding: 8px;
       text-align: left;
       .repo-header{
-        padding: 10px;
+        padding: 0px 10px 15px 10px;
         .repo-rating{
           float:right;
           text-align:left;
@@ -52,6 +52,12 @@ code {
             top:5px;
             position:relative;
           }
+        }
+        .repo-lang{
+          border-radius: 100px;
+          font-size: 12px;
+          display: block;
+          padding-top: 5px;
         }
       }
       .repo-title{
@@ -63,6 +69,14 @@ code {
       }
     }
   }
+}
+.search-error{
+  padding:10px;
+  margin:20px;
+}
+
+.repo-desc{
+  padding: 0px 0px 10px 10px;
 }
 
 .app-body{
@@ -96,7 +110,7 @@ code {
 }
 
 .search-repos-input{
-  width:80%;
+  width:40%;
 }
 
 

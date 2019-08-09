@@ -7,13 +7,24 @@ class RepoItem extends React.Component{
         let repo = this.props.item;
         return(
             <div className='repo-item'>
-                <Typography>
+                
                     <div className='repo-header'>
-                        <span className='repo-title'><a href={repo.html_url}>{repo.name}</a></span>
-                        <span className='repo-lang'>{repo.language}</span>
-                        <span className='repo-rating'><Star/>{repo.stargazers_count}</span>
+                        <Typography>
+                            <span className='repo-rating'><Star/>{repo.stargazers_count}</span>
+                            <span className='repo-title'><a href={repo.html_url}>{repo.name}</a></span>
+                            {repo.language ? <span className='repo-lang'>{repo.language}</span> : null}
+                           
+                        </Typography>
                     </div>
-                </Typography>
+                    {repo.description ? 
+                        <div className='repo-desc'>
+                            <Typography>
+                                {repo.description}
+                            </Typography>
+                        </div>
+                        :
+                        null
+                    }
                 <Divider/>
             </div>
         )

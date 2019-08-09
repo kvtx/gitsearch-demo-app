@@ -1,3 +1,4 @@
+//handle querying API to get repos from github based on query
 class Query  {
     constructor(){
         this.useStaging = true;
@@ -13,21 +14,19 @@ class Query  {
     async makeQuery(query){
         let url = `${this.getApiUrl()}/gitsearch/find`;
         return fetch(url, {
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                //'Content-Type': 'application/x-www-form-urlencoded',
             },
-            body:this.prepDataForAPI(query), // body data type must match "Content-Type" header
+            body:this.prepDataForAPI(query),
         })
         .then(res => res.json())
         .then(response => {
-            console.log(response);
             if('data' in response && 'items' in response.data){
-                return response.data.items;
+                return response.data;
             }
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => {return {'error':error}});
     }
 }
 
