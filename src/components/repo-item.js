@@ -5,13 +5,18 @@ import Star from '@material-ui/icons/Star';
 class RepoItem extends React.Component{
     render(){
         let repo = this.props.item;
+        console.log(repo);
         return(
             <div className='repo-item'>
                 
                     <div className='repo-header'>
                         <Typography>
                             <span className='repo-rating'><Star/>{repo.stargazers_count}</span>
-                            <span className='repo-title'><a href={repo.html_url}>{repo.name}</a></span>
+                            <span className='repo-title'>
+                                <a href={repo.owner.html_url}>{repo.owner.login}</a>
+                                <span>/</span>
+                                <a href={repo.html_url}>{repo.name}</a>
+                            </span>
                             {repo.language ? <span className='repo-lang'>{repo.language}</span> : null}
                            
                         </Typography>
